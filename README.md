@@ -1,26 +1,59 @@
-# Kernel-Support-Vector-Machine
-In this project I tried various Kernels and used the most suited one of Support Vector Machine , both in Python and R
+# Kernel Support Vector Machine
 
-# We use Kernel SVM when the data is not linearly separable 
-### Basically we project our problem in higher dimension and then we use our normal SVM classification and then to project the data in 2D , we re map into 2D .
+Binary classifier using an RBF-kernel SVM to predict whether a user purchases a product based on age and estimated salary.
 
-We should remember that it is very computation intensive to project something into higher dimension 
+## What It Does
 
-### So we use the [Gaussian RBF Kernel](http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=MachineLearning&doc=exercises/ex8/ex8.html)
+Trains a Support Vector Machine with a Gaussian RBF kernel on the **Social Network Ads** dataset, evaluates accuracy via a confusion matrix and classification report, and renders decision-boundary plots for both training and test sets.
 
-![down](http://image.ibb.co/iXy3Ww/RBF_KERNEL.png)
+### Why a Kernel?
 
-The projection in higher dimension looks something like this :
+When data is not linearly separable, the kernel trick projects features into a higher-dimensional space where a linear separator exists, then maps the boundary back to 2-D — without explicitly computing the high-dimensional coordinates (the "kernel trick").
 
-![down](http://www.cs.toronto.edu/~duvenaud/cookbook/multidimensional_kernels/Sqaured-exp%20kernel%20in%202d.png)
+## Dataset
 
-# We can add up two kernel functions :
+`Social_Network_Ads.csv` — 400 rows, 5 columns:
 
-K(x,l1) + K(x,l2)
+| Column | Description |
+|---|---|
+| User ID | Unique identifier (unused) |
+| Gender | Male / Female (unused) |
+| Age | User age |
+| EstimatedSalary | Annual salary estimate |
+| Purchased | Target — 0 or 1 |
 
+## 🛠 Tech Stack
 
-### The types of Kernel we can use are (sorry , for my bad handwritting ) :
+| | Tool | Purpose |
+|---|---|---|
+| 🐍 | Python 3 | Primary implementation |
+| 📊 | scikit-learn | SVM, scaling, metrics |
+| 🔢 | NumPy | Array operations |
+| 🐼 | pandas | CSV loading |
+| 📈 | matplotlib | Decision-boundary plots |
+| 📉 | R (e1071) | Alternative R implementation |
 
-![down](https://scontent.fccu3-1.fna.fbcdn.net/v/t1.0-9/26992744_185113902235823_8631901595683109275_n.jpg?oh=92858bf69c230770b8f900264686ccec&oe=5AE255E9)
+## Getting Started
 
-This is one of the most useful method of Classification
+```bash
+pip install numpy pandas matplotlib scikit-learn
+python kernel_svm.py
+```
+
+The script prints a confusion matrix, accuracy score, and classification report, then shows two decision-boundary plots (training and test sets).
+
+### R Version
+
+```r
+# Requires: caTools, e1071, ElemStatLearn
+Rscript kernel_svm.R
+```
+
+## ⚠️ Known Issues
+
+- The R script depends on `ElemStatLearn`, which was removed from CRAN. Install from archive or use an alternative plotting approach.
+- External images in the old README used hotlinked URLs that may be broken.
+
+## License
+
+[MIT](LICENSE)

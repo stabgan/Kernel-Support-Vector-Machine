@@ -1,26 +1,82 @@
-# Kernel-Support-Vector-Machine
-In this project I tried various Kernels and used the most suited one of Support Vector Machine , both in Python and R
+# 🧠 Kernel Support Vector Machine
 
-# We use Kernel SVM when the data is not linearly separable 
-### Basically we project our problem in higher dimension and then we use our normal SVM classification and then to project the data in 2D , we re map into 2D .
+A classification project demonstrating Kernel SVM on the Social Network Ads dataset. Implements non-linear decision boundaries using kernel tricks in both Python and R, with visualization of training and test set results.
 
-We should remember that it is very computation intensive to project something into higher dimension 
+## 📖 Methodology
 
-### So we use the [Gaussian RBF Kernel](http://openclassroom.stanford.edu/MainFolder/DocumentPage.php?course=MachineLearning&doc=exercises/ex8/ex8.html)
+When data is not linearly separable, Kernel SVM projects it into a higher-dimensional space where a linear hyperplane can separate the classes, then maps the decision boundary back to the original space.
 
-![down](http://image.ibb.co/iXy3Ww/RBF_KERNEL.png)
+### Kernel Types
 
-The projection in higher dimension looks something like this :
+| Kernel | Description |
+|--------|-------------|
+| **Gaussian RBF** | Radial Basis Function — maps data into infinite-dimensional space. Used in this project. |
+| **Polynomial** | Maps data using polynomial combinations of features. |
+| **Sigmoid** | Based on the hyperbolic tangent function, similar to neural network activation. |
+| **Linear** | Standard dot product — equivalent to regular SVM (no projection). |
 
-![down](http://www.cs.toronto.edu/~duvenaud/cookbook/multidimensional_kernels/Sqaured-exp%20kernel%20in%202d.png)
+This project uses the **Gaussian RBF kernel** (`kernel='rbf'`), which is well-suited for this dataset's non-linear purchase decision boundary based on Age and Estimated Salary.
 
-# We can add up two kernel functions :
+### Pipeline
 
-K(x,l1) + K(x,l2)
+1. Load and preprocess the Social Network Ads dataset
+2. Split into 75% training / 25% test sets
+3. Apply feature scaling (StandardScaler)
+4. Train SVC with RBF kernel
+5. Evaluate with confusion matrix
+6. Visualize decision boundaries for both sets
 
+## 🛠️ Tech Stack
 
-### The types of Kernel we can use are (sorry , for my bad handwritting ) :
+| Tool | Purpose |
+|------|---------|
+| 🐍 Python 3 | Primary implementation |
+| 📊 R | Alternative implementation |
+| 🔬 scikit-learn | SVM classifier, preprocessing, model evaluation |
+| 🔢 NumPy | Numerical operations |
+| 🐼 pandas | Data loading and manipulation |
+| 📈 matplotlib | Decision boundary visualization |
+| 📦 e1071 (R) | SVM implementation in R |
+| 📦 caTools (R) | Train/test splitting in R |
 
-![down](https://scontent.fccu3-1.fna.fbcdn.net/v/t1.0-9/26992744_185113902235823_8631901595683109275_n.jpg?oh=92858bf69c230770b8f900264686ccec&oe=5AE255E9)
+## 📋 Dependencies
 
-This is one of the most useful method of Classification
+### Python
+
+```
+numpy
+pandas
+matplotlib
+scikit-learn
+```
+
+### R
+
+```
+caTools
+e1071
+ElemStatLearn
+```
+
+## 🚀 How to Run
+
+### Python
+
+```bash
+pip install numpy pandas matplotlib scikit-learn
+python kernel_svm.py
+```
+
+### R
+
+```r
+source("kernel_svm.R")
+```
+
+Make sure `Social_Network_Ads.csv` is in the same directory as the script.
+
+## ⚠️ Known Issues
+
+- The R script depends on `ElemStatLearn`, which has been archived from CRAN. You may need to install it from a mirror or archive.
+- Visualization uses a fine mesh grid (`step=0.01`) which can be slow on large feature ranges. Increase the step size if performance is an issue.
+- External image links in the original README are broken / expired.
